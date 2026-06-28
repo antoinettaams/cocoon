@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette Cocoon */
+  --color-cocoon-cream: #FAF7F2;
+  --color-cocoon-sand: #EDE3D8;
+  --color-cocoon-sand-dark: #D4C4B0;
+  --color-cocoon-brown: #4A4644;
+  --color-cocoon-brown-light: #7A7270;
+  --color-cocoon-text: #605E5D;
+  --color-cocoon-terracotta: #C0866A;
+  --color-cocoon-terracotta-light: #E8C5AF;
+  --color-cocoon-white: #FFFFFF;
+  --color-cocoon-dark: #2C2A29;
+  --color-cocoon-green: #5A7A5C;
+
+  /* Typography */
+  --font-sans: "Figtree", sans-serif;
+
+  /* Custom animations */
+  --animate-fade-in: fadeIn 0.4s ease-out;
+  --animate-slide-up: slideUp 0.4s ease-out;
+  --animate-scale-in: scaleIn 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-cocoon-text);
+  background-color: var(--color-cocoon-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
