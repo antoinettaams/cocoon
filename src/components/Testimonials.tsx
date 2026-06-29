@@ -22,7 +22,7 @@ const testimonials = [
     location: "Parakou",
     rating: 5,
     date: "il y a 3 semaines",
-    text: "Au 7e mois, mon dos était en feu chaque matin. J'ai commandé Cocoon un jeudi, reçu le samedi, et dès le week-end j'ai retrouvé un vrai sommeil. Mon médecin m'a même félicitée d'avoir trouvé cette solution de confort.",
+    text: "Au 7e mois, mon dos était en feu chaque matin. J'ai commandé Cocoon un jeudi, reçu le vendredi, et dès le week-end j'ai retrouvé un vrai sommeil. Mon médecin m'a même félicitée d'avoir trouvé cette solution de confort.",
     highlight: "j'ai retrouvé un vrai sommeil",
   },
 ];

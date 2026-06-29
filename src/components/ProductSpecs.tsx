@@ -11,7 +11,7 @@ const specs = [
   {
     icon: Weight,
     label: "Poids",
-    value: "Environ 1,2 kg",
+    value: "Environ 1,3 kg",
     note: "Ultra-léger — à emporter partout avec soi",
   },
   {

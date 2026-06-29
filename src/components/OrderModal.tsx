@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { X, Minus, Plus, Gift, Truck, CheckCircle, Info } from "lucide-react";
+import { X, Minus, Plus, Gift, Truck, CheckCircle, Info, Loader2 } from "lucide-react"; // Ajout de Loader2 pour le chargement
 import { useOrderModal, type ColorOption } from "@/context/OrderModalContext";
 
 const PRICE = 40000;
+// ⚠️ REMPLACE PAR TON ID FORMSPREE ICI
+const FORMSPREE_FORM_ID = "xlgylnya"; 
 
 const colorOptions: { id: ColorOption; label: string; hex: string }[] = [
   { id: "beige", label: "Beige", hex: "#D4B896" },
@@ -20,6 +22,7 @@ export default function OrderModal() {
   const [phone, setPhone] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Nouvel état pour le chargement
   const [errors, setErrors] = useState<Record<string, string>>({});
   const overlayRef = useRef<HTMLDivElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +39,8 @@ export default function OrderModal() {
   const formatPrice = (amount: number) =>
     new Intl.NumberFormat("fr-FR").format(amount) + " FCFA";
 
+  const selectedColorLabel = colorOptions.find((c) => c.id === selectedColor)?.label ?? "Beige";
+
   const validate = () => {
     const next: Record<string, string> = {};
     if (!firstName.trim()) next.firstName = "Veuillez entrer votre prénom.";
@@ -47,13 +52,45 @@ export default function OrderModal() {
     return next;
   };
 
-  const handleSubmit = () => {
+  // Gestion de la soumission avec Formspree
+  const handleSubmit = async () => {
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          Prenom: firstName,
+          Nom: lastName,
+          Lieu_Residence: location,
+          Telephone: phone,
+          Couleur: selectedColorLabel,
+          Quantite: quantity,
+          Total_Commande: formatPrice(total),
+          Acompte_50_pourcent: formatPrice(acompte),
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setErrors({ submit: "Une erreur est survenue lors de l'envoi. Veuillez réessayer." });
+      }
+    } catch (error) {
+      setErrors({ submit: "Erreur réseau. Vérifiez votre connexion internet." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -68,8 +105,6 @@ export default function OrderModal() {
   };
 
   if (!isOpen) return null;
-
-  const selectedColorLabel = colorOptions.find((c) => c.id === selectedColor)?.label ?? "Beige";
 
   return (
     <div
@@ -166,6 +201,13 @@ export default function OrderModal() {
             </div>
           ) : (
             <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} noValidate className="px-6 py-5 space-y-5">
+              {/* Message d'erreur global si l'envoi Formspree échoue */}
+              {errors.submit && (
+                <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
+                  {errors.submit}
+                </div>
+              )}
+
               {/* Nom / Prénom */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
@@ -180,13 +222,14 @@ export default function OrderModal() {
                     id="firstName"
                     type="text"
                     value={firstName}
+                    disabled={isSubmitting}
                     onChange={(e) => {
                       setFirstName(e.target.value);
                       if (errors.firstName)
                         setErrors((prev) => ({ ...prev, firstName: "" }));
                     }}
                     placeholder="Amina"
-                    className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.firstName ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"}`}
+                    className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.firstName ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"} disabled:opacity-60`}
                   />
                   {errors.firstName && (
                     <p className="text-xs text-red-500 mt-1">{errors.firstName}</p>
@@ -203,13 +246,14 @@ export default function OrderModal() {
                     id="lastName"
                     type="text"
                     value={lastName}
+                    disabled={isSubmitting}
                     onChange={(e) => {
                       setLastName(e.target.value);
                       if (errors.lastName)
                         setErrors((prev) => ({ ...prev, lastName: "" }));
                     }}
                     placeholder="Koffi"
-                    className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.lastName ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"}`}
+                    className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.lastName ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"} disabled:opacity-60`}
                   />
                   {errors.lastName && (
                     <p className="text-xs text-red-500 mt-1">{errors.lastName}</p>
@@ -230,13 +274,14 @@ export default function OrderModal() {
                   id="location"
                   type="text"
                   value={location}
+                  disabled={isSubmitting}
                   onChange={(e) => {
                     setLocation(e.target.value);
                     if (errors.location)
                       setErrors((prev) => ({ ...prev, location: "" }));
                   }}
                   placeholder="Ex : Cotonou, Porto-Novo, Parakou…"
-                  className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.location ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"}`}
+                  className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.location ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"} disabled:opacity-60`}
                 />
                 {errors.location && (
                   <p className="text-xs text-red-500 mt-1">{errors.location}</p>
@@ -256,13 +301,14 @@ export default function OrderModal() {
                   id="phone"
                   type="tel"
                   value={phone}
+                  disabled={isSubmitting}
                   onChange={(e) => {
                     setPhone(e.target.value);
                     if (errors.phone)
                       setErrors((prev) => ({ ...prev, phone: "" }));
                   }}
                   placeholder="Ex : +229 97 00 00 00"
-                  className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.phone ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"}`}
+                  className={`w-full px-4 py-3 rounded-xl border text-cocoon-brown text-sm placeholder:text-cocoon-sand-dark bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-cocoon-terracotta/40 ${errors.phone ? "border-red-400" : "border-cocoon-sand hover:border-cocoon-sand-dark"} disabled:opacity-60`}
                 />
                 {errors.phone && (
                   <p className="text-xs text-red-500 mt-1">{errors.phone}</p>
@@ -279,12 +325,13 @@ export default function OrderModal() {
                     <button
                       key={c.id}
                       type="button"
+                      disabled={isSubmitting}
                       onClick={() => setSelectedColor(c.id)}
                       className={`flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-sm font-medium transition-all ${
                         selectedColor === c.id
                           ? "border-cocoon-brown text-cocoon-brown bg-cocoon-cream shadow-sm"
                           : "border-cocoon-sand text-cocoon-text hover:border-cocoon-sand-dark"
-                      }`}
+                      } disabled:opacity-60`}
                     >
                       <span
                         className="w-4 h-4 rounded-full border border-black/10 shrink-0"
@@ -307,7 +354,7 @@ export default function OrderModal() {
                       type="button"
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                       className="w-11 h-11 flex items-center justify-center text-cocoon-brown hover:bg-cocoon-cream transition-colors disabled:opacity-40"
-                      disabled={quantity <= 1}
+                      disabled={quantity <= 1 || isSubmitting}
                       aria-label="Réduire la quantité"
                     >
                       <Minus size={16} />
@@ -319,6 +366,7 @@ export default function OrderModal() {
                       type="button"
                       onClick={() => setQuantity((q) => q + 1)}
                       className="w-11 h-11 flex items-center justify-center text-cocoon-brown hover:bg-cocoon-cream transition-colors"
+                      disabled={isSubmitting}
                       aria-label="Augmenter la quantité"
                     >
                       <Plus size={16} />
@@ -383,9 +431,17 @@ export default function OrderModal() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-full bg-cocoon-brown text-cocoon-cream font-bold text-base hover:bg-cocoon-dark active:scale-95 transition-all shadow-md hover:shadow-lg"
+                disabled={isSubmitting}
+                className="w-full py-4 rounded-full bg-cocoon-brown text-cocoon-cream font-bold text-base hover:bg-cocoon-dark active:scale-95 transition-all shadow-md hover:shadow-lg disabled:opacity-70 flex items-center justify-center gap-2"
               >
-                Précommander — {formatPrice(total)}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    Envoi en cours...
+                  </>
+                ) : (
+                  `Précommander — ${formatPrice(total)}`
+                )}
               </button>
 
               <p className="text-center text-xs text-cocoon-brown-light pb-2">
