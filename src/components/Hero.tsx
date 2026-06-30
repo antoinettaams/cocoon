@@ -19,9 +19,9 @@ const colorOptions: { id: ColorOption; label: string; hex: string }[] = [
 ];
 
 const colorImages: Record<ColorOption, string> = {
-  beige: "/matelas-cocoon-beige.svg",
-  bleu: "/matelas-cocoon-bleu.svg",
-  rose: "/matelas-cocoon-rose.svg",
+  beige: "/matelas-beige.png",
+  bleu: "/matelas-bleu.png",
+  rose: "/matelas-rose.png",
 };
 
 export default function Hero() {
