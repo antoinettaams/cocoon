@@ -69,7 +69,7 @@ export default function HowItWorks() {
               <div className="absolute -inset-6 bg-cocoon-terracotta/10 rounded-full blur-3xl" />
               <div className="relative bg-cocoon-cream rounded-3xl p-8 shadow-lg">
                 <Image
-                  src="/matelas-cocoon.svg"
+                  src="/matelas-cocoon.png"
                   alt="Matelas Cocoon — Vue du produit"
                   width={600}
                   height={750}
