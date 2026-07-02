@@ -27,11 +27,11 @@ const colorImages: Record<ColorOption, string[]> = {
   ],
   bleu: [
     "/matelas-bleu.png",
-    "/matelas-cocoon.png",
+    "/bleu-1.png",
   ],
   rose: [
     "/matelas-rose.png",
-    "/matelas-cocoon.png",
+    "/roseone.png",
   ],
 };
 
@@ -158,7 +158,7 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex items-center justify-center">
             <div className="relative w-full max-w-lg mx-auto">
               <div className="absolute -inset-4 bg-cocoon-sand/40 rounded-full blur-3xl" />
-              <div className="relative bg-white rounded-2xl shadow-xl p-1.5 flex flex-col gap-2">
+              <div className="relative rounded-2xl flex flex-col gap-2">
 
                 {/* Image principale */}
                 <div className="overflow-hidden rounded-xl bg-cocoon-cream/40">
@@ -175,14 +175,14 @@ export default function Hero() {
 
                 {/* Vignettes */}
                 {images.length > 1 && (
-                  <div className="flex gap-1.5 overflow-x-auto px-0.5 pb-0.5 scrollbar-thin scrollbar-thumb-cocoon-sand scrollbar-track-transparent">
+                  <div className="flex gap-4 scrollbar-thin scrollbar-thumb-cocoon-sand scrollbar-track-transparent">
                     {images.map((src, i) => (
                       <button
                         key={i}
                         onClick={() => setActiveIndex(i)}
-                        className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                        className={`shrink-0 w-24 h-24 mt-4 transition-all duration-200 ${
                           i === activeIndex
-                            ? "border-cocoon-terracotta shadow-md scale-105"
+                            ? "border-cocoon-terracotta "
                             : "border-cocoon-sand/60 hover:border-cocoon-sand hover:scale-105 opacity-70 hover:opacity-100"
                         }`}
                         aria-label={`Voir image ${i + 1}`}
@@ -192,7 +192,7 @@ export default function Hero() {
                           alt={`Vignette ${i + 1}`}
                           width={80}
                           height={80}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded-lg"
                         />
                       </button>
                     ))}
