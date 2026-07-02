@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { CheckCircle, Gift, Truck, Star } from "lucide-react";
+import { useState, useEffect } from "react";
 import OrderButton from "./OrderButton";
 import { useOrderModal, type ColorOption } from "@/context/OrderModalContext";
 
@@ -18,14 +19,32 @@ const colorOptions: { id: ColorOption; label: string; hex: string }[] = [
   { id: "rose", label: "Rose", hex: "#D4829A" },
 ];
 
-const colorImages: Record<ColorOption, string> = {
-  beige: "/matelas-beige.png",
-  bleu: "/matelas-bleu.png",
-  rose: "/matelas-rose.png",
+// Ajoutez ici les images de chaque couleur dans l'ordre d'affichage
+const colorImages: Record<ColorOption, string[]> = {
+  beige: [
+    "/matelas-beige.png",
+    "/matelas-cocoon.png",
+  ],
+  bleu: [
+    "/matelas-bleu.png",
+    "/matelas-cocoon.png",
+  ],
+  rose: [
+    "/matelas-rose.png",
+    "/matelas-cocoon.png",
+  ],
 };
 
 export default function Hero() {
   const { selectedColor, setSelectedColor } = useOrderModal();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [selectedColor]);
+
+  const images = colorImages[selectedColor];
+  const colorLabel = colorOptions.find((c) => c.id === selectedColor)?.label;
 
   return (
     <section className="bg-cocoon-cream overflow-hidden">
@@ -101,7 +120,7 @@ export default function Hero() {
                 ))}
               </div>
               <span className="text-sm text-cocoon-brown font-medium capitalize">
-                {colorOptions.find((c) => c.id === selectedColor)?.label}
+                {colorLabel}
               </span>
             </div>
 
@@ -135,19 +154,51 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Image produit */}
+          {/* Galerie image produit */}
           <div className="order-1 lg:order-2 flex items-center justify-center">
-            <div className="relative w-full max-w-md mx-auto">
+            <div className="relative w-full max-w-lg mx-auto">
               <div className="absolute -inset-4 bg-cocoon-sand/40 rounded-full blur-3xl" />
-              <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden p-4">
-                <Image
-                  src={colorImages[selectedColor]}
-                  alt={`Matelas Cocoon ${colorOptions.find((c) => c.id === selectedColor)?.label} — Matelas de grossesse avec ouverture ventrale`}
-                  width={600}
-                  height={750}
-                  className="w-full h-auto transition-opacity duration-300"
-                  priority
-                />
+              <div className="relative bg-white rounded-2xl shadow-xl p-1.5 flex flex-col gap-2">
+
+                {/* Image principale */}
+                <div className="overflow-hidden rounded-xl bg-cocoon-cream/40">
+                  <Image
+                    key={`${selectedColor}-${activeIndex}`}
+                    src={images[activeIndex]}
+                    alt={`Matelas Cocoon ${colorLabel} — vue ${activeIndex + 1}`}
+                    width={800}
+                    height={1000}
+                    className="w-full h-auto object-cover animate-fade-in"
+                    priority
+                  />
+                </div>
+
+                {/* Vignettes */}
+                {images.length > 1 && (
+                  <div className="flex gap-1.5 overflow-x-auto px-0.5 pb-0.5 scrollbar-thin scrollbar-thumb-cocoon-sand scrollbar-track-transparent">
+                    {images.map((src, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActiveIndex(i)}
+                        className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                          i === activeIndex
+                            ? "border-cocoon-terracotta shadow-md scale-105"
+                            : "border-cocoon-sand/60 hover:border-cocoon-sand hover:scale-105 opacity-70 hover:opacity-100"
+                        }`}
+                        aria-label={`Voir image ${i + 1}`}
+                      >
+                        <Image
+                          src={src}
+                          alt={`Vignette ${i + 1}`}
+                          width={80}
+                          height={80}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
               </div>
             </div>
           </div>
