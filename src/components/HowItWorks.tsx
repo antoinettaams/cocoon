@@ -67,13 +67,13 @@ export default function HowItWorks() {
           <div className="flex justify-center">
             <div className="relative w-full max-w-sm">
               <div className="absolute -inset-6 bg-cocoon-terracotta/10 rounded-full blur-3xl" />
-              <div className="relative bg-cocoon-cream rounded-3xl p-8 shadow-lg">
+              <div className="relative bg-cocoon-cream rounded-3xl p-4 shadow-lg">
                 <Image
                   src="/matelas-cocoon.png"
                   alt="Matelas Cocoon — Vue du produit"
                   width={600}
                   height={750}
-                  className="w-full h-auto"
+                  className="w-full h-[auto]"
                 />
                 {/* Badges flottants */}
                 <div className="absolute -top-3 -right-3 bg-cocoon-brown text-cocoon-cream text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
