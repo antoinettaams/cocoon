@@ -22,12 +22,15 @@ const colorOptions: { id: ColorOption; label: string; hex: string }[] = [
 // Ajoutez ici les images de chaque couleur dans l'ordre d'affichage
 const colorImages: Record<ColorOption, string[]> = {
   beige: [
-    "/matelas-beige.png",
+    "/matelas-beige.png", 
     "/matelas-cocoon.png",
+    "/beige3.png",
+    "/beige2.png",
+    "/beige1.png",
   ],
   bleu: [
     "/matelas-bleu.png",
-    "/bleu-1.png",
+    "/bleu-2.png",
   ],
   rose: [
     "/matelas-rose.png",
@@ -155,10 +158,10 @@ export default function Hero() {
           </div>
 
           {/* Galerie image produit */}
-          <div className="order-1 lg:order-2 flex items-center justify-center">
-            <div className="relative w-full max-w-lg mx-auto">
+          <div className="order-1 lg:order-2 flex items-center justify-center -mx-4 sm:mx-0">
+            <div className="relative w-full sm:max-w-xl mx-auto">
               <div className="absolute -inset-4 bg-cocoon-sand/40 rounded-full blur-3xl" />
-              <div className="relative rounded-2xl flex flex-col gap-2">
+              <div className="relative rounded-2xl flex flex-col gap-3">
 
                 {/* Image principale */}
                 <div className="overflow-hidden rounded-xl bg-cocoon-cream/40">
@@ -166,8 +169,8 @@ export default function Hero() {
                     key={`${selectedColor}-${activeIndex}`}
                     src={images[activeIndex]}
                     alt={`Matelas Cocoon ${colorLabel} — vue ${activeIndex + 1}`}
-                    width={800}
-                    height={1000}
+                    width={1000}
+                    height={1200}
                     className="w-full h-auto object-cover animate-fade-in"
                     priority
                   />
@@ -175,14 +178,14 @@ export default function Hero() {
 
                 {/* Vignettes */}
                 {images.length > 1 && (
-                  <div className="flex gap-4 scrollbar-thin scrollbar-thumb-cocoon-sand scrollbar-track-transparent">
+                  <div className="flex gap-3 overflow-x-auto px-1 pb-1 scrollbar-thin scrollbar-thumb-cocoon-sand scrollbar-track-transparent">
                     {images.map((src, i) => (
                       <button
                         key={i}
                         onClick={() => setActiveIndex(i)}
-                        className={`shrink-0 w-24 h-24 mt-4 transition-all duration-200 ${
+                        className={`shrink-0 w-20 h-20 sm:w-24 sm:h-24 transition-all duration-200 rounded-xl overflow-hidden border-2 ${
                           i === activeIndex
-                            ? "border-cocoon-terracotta "
+                            ? "border-cocoon-terracotta shadow-md scale-105"
                             : "border-cocoon-sand/60 hover:border-cocoon-sand hover:scale-105 opacity-70 hover:opacity-100"
                         }`}
                         aria-label={`Voir image ${i + 1}`}
@@ -190,9 +193,9 @@ export default function Hero() {
                         <Image
                           src={src}
                           alt={`Vignette ${i + 1}`}
-                          width={80}
-                          height={80}
-                          className="w-full h-full object-cover rounded-lg"
+                          width={120}
+                          height={120}
+                          className="w-full h-full object-cover"
                         />
                       </button>
                     ))}
