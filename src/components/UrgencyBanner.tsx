@@ -11,7 +11,7 @@ export default function UrgencyBanner() {
       <span className="opacity-50" style={styles.separator}>·</span>
       <span style={styles.badge}>
         <Package size={15} className="shrink-0 text-yellow-200" />
-        Stock disponible — expédition sous&nbsp;<strong>24&nbsp;h</strong>
+        Précommande ouverte · Livraison sous&nbsp;<strong>~2&nbsp;semaines</strong>
       </span>
       <span className="opacity-50" style={styles.separator}>·</span>
     </div>

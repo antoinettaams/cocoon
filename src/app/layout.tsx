@@ -14,14 +14,14 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "Cocoon — Matelas de Grossesse | Livraison Gratuite au Bénin",
   description:
-    "Dormez enfin confortablement sur le ventre pendant votre grossesse. Cocoon, le matelas gonflable avec ouverture ventrale conçu pour soulager le dos et les hanches. Pompe manuelle offerte. Livraison gratuite partout au Bénin.",
+    "Dormez enfin confortablement sur le ventre pendant votre grossesse. Cocoon, le matelas gonflable avec ouverture ventrale conçu pour le confort du dos et des hanches. Pompe manuelle offerte. Livraison gratuite partout au Bénin.",
   keywords: [
     "matelas grossesse",
     "matelas femme enceinte",
     "grossesse confort",
     "Bénin",
     "livraison Cotonou",
-    "douleur dos grossesse",
+    "confort grossesse",
   ],
   openGraph: {
     title: "Cocoon — Matelas de Grossesse | Livraison Gratuite au Bénin",

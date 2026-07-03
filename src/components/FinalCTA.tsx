@@ -33,7 +33,7 @@ export default function FinalCTA() {
 
         <p className="text-lg text-cocoon-sand leading-relaxed max-w-xl">
           Ne passez plus une nuit de plus à vous retourner dans tous les sens.
-          Commandez Cocoon maintenant et ressentez la différence dès la première
+          Commandez Cocoon maintenant et profitez d&apos;un vrai confort dès la première
           nuit.
         </p>
 

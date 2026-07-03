@@ -3,15 +3,15 @@ import OrderButton from "./OrderButton";
 
 const before = [
   "Nuits agitées, incapable de trouver une position confortable",
-  "Douleurs de dos et de hanches qui s'intensifient chaque nuit",
+  "Difficile de trouver une position confortable",
   "Se réveiller épuisée après de longues heures au lit",
   "Coussin de grossesse classique qui glisse et tombe",
-  "Stress et anxiété liés au manque de sommeil",
+  "Des nuits inconfortables, nuit après nuit",
 ];
 
 const after = [
-  "Dormir sur le ventre comme avant, sans aucune pression sur le bébé",
-  "Dos, hanches et lombaires enfin soulagés dès la première nuit",
+  "Dormir sur le ventre comme avant, sans pression sur votre ventre",
+  "Dos et hanches enfin bien installés dès la première nuit",
   "Se lever reposée et de bonne humeur chaque matin",
   "Matelas stable, léger et facile à transporter partout",
   "Sérénité retrouvée pour profiter pleinement de votre grossesse",

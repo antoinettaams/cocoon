@@ -35,7 +35,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={14} className="text-cocoon-terracotta shrink-0" />
-                Paiement à la livraison
+                Précommande : 50% à la confirmation, 50% à la livraison
               </li>
             </ul>
           </div>

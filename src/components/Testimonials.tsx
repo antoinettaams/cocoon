@@ -6,7 +6,7 @@ const testimonials = [
     location: "Cotonou",
     rating: 5,
     date: "il y a 2 semaines",
-    text: "Depuis ma 6e semaine de grossesse, je souffrais tellement le soir que je pleurais parfois. Mon mari a commandé Cocoon et franchement, la première nuit j'ai dormi d'une traite. C'est incroyable comme ça peut changer autant de choses.",
+    text: "Depuis ma 6e semaine de grossesse, je n'arrivais plus à trouver une position confortable le soir. Mon mari a commandé Cocoon et franchement, la première nuit j'ai dormi d'une traite. C'est incroyable comme ça peut changer autant de choses.",
     highlight: "la première nuit j'ai dormi d'une traite",
   },
   {
@@ -22,7 +22,7 @@ const testimonials = [
     location: "Parakou",
     rating: 5,
     date: "il y a 3 semaines",
-    text: "Au 7e mois, mon dos était en feu chaque matin. J'ai commandé Cocoon un jeudi, reçu le vendredi, et dès le week-end j'ai retrouvé un vrai sommeil. Mon médecin m'a même félicitée d'avoir trouvé cette solution de confort.",
+    text: "Au 7e mois, je n'arrivais plus à me reposer confortablement. J'ai commandé Cocoon un jeudi, reçu le vendredi, et dès le week-end j'ai retrouvé un vrai sommeil. Un vrai confort au quotidien.",
     highlight: "j'ai retrouvé un vrai sommeil",
   },
 ];

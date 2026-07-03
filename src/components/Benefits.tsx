@@ -11,26 +11,26 @@ import OrderButton from "./OrderButton";
 const benefits = [
   {
     icon: Activity,
-    title: "Dos et hanches soulagés",
-    desc: "L'ouverture ventrale répartit uniformément le poids de votre ventre et libère la pression sur votre colonne vertébrale, vos hanches et vos lombaires.",
+    title: "Confort pour le dos et les hanches",
+    desc: "L'ouverture ventrale répartit uniformément le poids de votre ventre pour un meilleur confort au niveau du dos et des hanches.",
     highlight: true,
   },
   {
     icon: Heart,
-    title: "Bien-être du bébé favorisé",
-    desc: "La position ventrale améliore la circulation sanguine, ce qui favorise un meilleur apport en nutriments et oxygène pour votre bébé tout au long de la nuit.",
+    title: "Un espace pensé pour votre ventre",
+    desc: "L'ouverture accueille votre ventre en douceur, pour vous détendre allongée sans aucune pression.",
     highlight: false,
   },
   {
     icon: Moon,
-    title: "Sommeil profond retrouvé",
-    desc: "Fini les insomnies liées à la grossesse. Avec Cocoon, retrouvez la position de sommeil que vous aimiez avant — sur le ventre — pour des nuits enfin réparatrices.",
+    title: "Repos confortable",
+    desc: "Retrouvez le plaisir de vous reposer allongée sur le ventre, pour des nuits plus sereines.",
     highlight: false,
   },
   {
     icon: Wind,
-    title: "Réduction des gonflements",
-    desc: "Allongée sur le ventre en appui sur Cocoon, votre circulation est optimisée. Les jambes et les chevilles gonflées par la grossesse récupèrent naturellement.",
+    title: "Détente et légèreté",
+    desc: "Un moment de repos confortable pour souffler et vous relâcher à tout moment de la journée.",
     highlight: false,
   },
   {
@@ -57,11 +57,10 @@ export default function Benefits() {
             Pourquoi Cocoon
           </span>
           <h2 className="text-3xl md:text-4xl font-black text-cocoon-brown mb-4 leading-tight">
-            Six bienfaits concrets pour votre grossesse
+            Six raisons d&apos;adopter Cocoon
           </h2>
           <p className="text-cocoon-text text-lg leading-relaxed">
-            Conçu pour répondre aux inconforts les plus fréquents pendant la
-            grossesse — de façon simple, naturelle et efficace.
+            Pensé pour votre confort au quotidien pendant la grossesse.
           </p>
         </div>
 
@@ -108,7 +107,7 @@ export default function Benefits() {
         <div className="text-center mt-12">
           <OrderButton label="Je veux mon Cocoon" size="lg" />
           <p className="text-sm text-cocoon-text mt-3">
-            Livraison gratuite · Pompe manuelle offerte · Paiement à la livraison
+            Livraison gratuite · Pompe manuelle offerte · Précommande : 50% à la confirmation, 50% à la livraison
           </p>
         </div>
       </div>

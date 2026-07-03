@@ -8,7 +8,7 @@ import { useOrderModal, type ColorOption } from "@/context/OrderModalContext";
 
 const keyPoints = [
   "S'allonger sur le ventre tout au long de la grossesse",
-  "Soulager le dos, les hanches et les lombaires",
+  "Confort pour le dos et les hanches",
   "Confort optimal pour toutes les morphologies",
   "Utilisable dès le 1er trimestre jusqu'à l'accouchement",
 ];

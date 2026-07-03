@@ -24,8 +24,8 @@ const badges = [
   },
   {
     icon: Zap,
-    title: "Livraison rapide",
-    desc: "Traitée sous 24 h. Vous recevez votre colis rapidement.",
+    title: "Précommande",
+    desc: "Confirmation sous 24 h. Livraison à domicile sous ~2 semaines.",
     color: "text-amber-600",
     bg: "bg-amber-50",
   },
